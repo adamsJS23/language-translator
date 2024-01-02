@@ -4,9 +4,11 @@ const fromText = document.querySelector(".from-text"),
   selectTag = document.querySelectorAll("select"),
   icons = document.querySelectorAll(".row i"),
   translateBtn = document.querySelector("button");
-console.log(selectTag);
+
+///////////////////////////////////////////////
+//Fill the each select element with countries//
+
 selectTag.forEach((tag, id) => {
-  console.log(tag);
   for (let country_code in countries) {
     // Select en-GB and hi-IN as default languages
     let selected;
@@ -16,11 +18,37 @@ selectTag.forEach((tag, id) => {
       selected = "selected";
     }
 
-    // Fill the each select element with countries
-
     let option = `<option ${selected} value='${country_code}'>${countries[country_code]}</option>`;
 
     tag.insertAdjacentHTML("beforeend", option);
   }
-  // console.log(tag);
+});
+
+////////////////////////////////////////
+///////////Exchange languages///////////
+
+exchangeIcon.addEventListener("click", () => {
+  // let tempText = fromText.value;
+  // fromText.value = toText.value;
+  // toText.value = tempText;
+
+  [fromText.value, toText.value] = [toText.value, fromText.value];
+
+  // const tempLang = selectTag[0].value;
+  // selectTag[0].value = selectTag[1].value;
+  // selectTag[1].value = tempLang;
+
+  [selectTag[0].value, selectTag[1].value] = [
+    selectTag[1].value,
+    selectTag[0].value,
+  ];
+});
+
+///////////////////////////////////////////////////////////////////////////////
+//Set translation textarea to empty string when the first text area is empty//
+
+fromText.addEventListener("click", () => {
+  if (!fromText.value) {
+    toText.value = "";
+  }
 });
