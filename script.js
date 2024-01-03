@@ -47,7 +47,7 @@ exchangeIcon.addEventListener("click", () => {
 ///////////////////////////////////////////////////////////////////////////////
 //Set translation textarea to empty string when the first text area is empty//
 
-fromText.addEventListener("click", () => {
+fromText.addEventListener("keyup", () => {
   if (!fromText.value) {
     toText.value = "";
   }
