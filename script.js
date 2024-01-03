@@ -80,3 +80,34 @@ translateBtn.addEventListener("click", () => {
 
   toText.setAttribute("placeholder", "Translation");
 });
+
+///////////////////////////////////////////////////////
+///Copy to clipboard and text spelling functionality///
+
+icons.forEach((icon) => {
+  icon.addEventListener("click", ({ target }) => {
+    if (!fromText.value || !toText.value) {
+      return;
+    }
+
+    if (target.classList.contains("fa-copy")) {
+      // Copy function function doesn't work properly have to be fixed
+      if (target.id === "form") {
+        navigator.clipboard.writeText(fromText.value);
+      } else {
+        navigator.clipboard.writeText(toText.value);
+      }
+    } else {
+      let utterence;
+      if (target.id === "from") {
+        utterence = new SpeechSynthesisUtterance(fromText.value);
+        utterence.lang = selectTag[0].value;
+      } else {
+        utterence = new SpeechSynthesisUtterance(toText.value);
+        utterence.lang = selectTag[1].value;
+      }
+
+      speechSynthesis.speak(utterence);
+    }
+  });
+});
